@@ -5,6 +5,8 @@ const cors = require("cors");
 const port = 3333;
 const app = express();
 
+mongoose.connect("");
+
 const user = require("./routes/user");
 
 app.use(express.json());

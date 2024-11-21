@@ -13,8 +13,15 @@
   "author": "Pedro Victor",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^9.2.0",
     "cors": "^2.8.5",
     "express": "^4.21.1",
-    "mongoose": "^8.8.2"
+    "mongoose": "^8.8.2",
+    "nubank-finances-server": "file:"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "eslint": "^9.15.0",
+    "globals": "^15.12.0"
   }
 }
