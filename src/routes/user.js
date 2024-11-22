@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+const { filterDeletedPiggyBanks } = require("../utils");
 const { faker } = require("@faker-js/faker");
 
 const userModel = require("../database/schemas/User");
@@ -17,7 +18,7 @@ router.get("/login", async (req, res) => {
 					status: 200,
 					message: "Usuário autenticado com sucesso!",
 					data: {
-						userId: requestedUser._id,
+						user: filterDeletedPiggyBanks(requestedUser),
 					},
 				});
 			} else {
@@ -38,7 +39,7 @@ router.get("/login", async (req, res) => {
 				status: 200,
 				message: "Usuário autenticado com sucesso!",
 				data: {
-					userId: createdUser._id,
+					user: createdUser,
 				},
 			});
 		}
@@ -49,20 +50,6 @@ router.get("/login", async (req, res) => {
 			error: err.stack,
 		});
 	}
-});
-
-router.get("/", async (req, res) => {
-	const { userId } = req.body;
-
-	const requestedUser = await userModel.findOne({ _id: userId });
-
-	res.status(200).send({
-		status: 200,
-		data: {
-			username: requestedUser.username,
-			balance: requestedUser.balance,
-		},
-	});
 });
 
 module.exports = router;
